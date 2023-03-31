@@ -1,9 +1,10 @@
 using MeetApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetApp.API.Controllers;
-
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class ValuesController : ControllerBase
@@ -19,6 +20,8 @@ public class ValuesController : ControllerBase
         var values = await _context.Values?.ToListAsync();
         return Ok(values);
     }
+
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetValue(int id)
     {
