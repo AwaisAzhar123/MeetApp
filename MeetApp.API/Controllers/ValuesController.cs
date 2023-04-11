@@ -14,7 +14,7 @@ public class ValuesController : ControllerBase
     {
         _context=context;
     }
-    [AllowAnonymous]
+    [Authorize]
     [HttpGet(Name = "GetValues")]
     public async Task<IActionResult> GetValues()
     {

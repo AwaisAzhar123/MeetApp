@@ -1,7 +1,10 @@
+using System.Net;
 using System.Text;
 using MeetApp.API.Data;
+using MeetApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -59,6 +62,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 }
             });
         });
+        
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -75,6 +79,20 @@ if (app.Environment.IsDevelopment())
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
         });
     app.UseSwaggerUI();
+
+}
+else
+{
+    app.UseExceptionHandler( builder => {builder.Run(async context =>{
+        context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if(error != null)
+        {
+            context.Response.AddApplicationError(error.Error.Message);
+            await context.Response.WriteAsync(error.Error.Message);
+        }
+    });
+    });
 
 }
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
