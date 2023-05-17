@@ -1,5 +1,7 @@
 using System.Net;
 using System.Text;
+using System.Text.Json.Serialization;
+using AutoMapper;
 using MeetApp.API.Data;
 using MeetApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,9 +16,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options => 
+{ 
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddTransient<Seed>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IMeetAppRepository, MeetAppRepository>();
+builder.Services.AddAutoMapper();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options => {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -70,6 +80,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -95,6 +106,17 @@ else
     });
 
 }
+
+// Seeding data into the database
+ /* using (var scope = app.Services.CreateScope())
+{
+    // Get Seed service
+    var seeder = scope.ServiceProvider.GetService<Seed>();
+
+    // Seed the data
+    seeder.SeedUsers();
+} */
+
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthentication();
