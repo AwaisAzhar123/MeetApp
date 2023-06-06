@@ -12,7 +12,7 @@
         "Country": "Libya",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/86.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/86.jpg",
                 "isProfilePhoto": true,
                 "Description": "Incididunt tempor et Lorem eu nulla mollit est voluptate occaecat exercitation dolore esse esse."
             }
@@ -31,7 +31,7 @@
         "Country": "Turkey",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/77.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/77.jpg",
                 "isProfilePhoto": true,
                 "Description": "Mollit dolor id est voluptate sunt laborum anim consectetur incididunt ex."
             }
@@ -50,7 +50,7 @@
         "Country": "Suriname",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/3.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/3.jpg",
                 "isProfilePhoto": true,
                 "Description": "Enim ea consequat dolore sint."
             }
@@ -69,7 +69,7 @@
         "Country": "Korea (North)",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/92.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/92.jpg",
                 "isProfilePhoto": true,
                 "Description": "Minim id dolore nisi non eu eiusmod ullamco magna magna proident minim."
             }
@@ -88,7 +88,7 @@
         "Country": "Pakistan",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/60.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/60.jpg",
                 "isProfilePhoto": true,
                 "Description": "Sint est cillum adipisicing aliqua consequat consequat amet mollit enim irure fugiat in eiusmod ea."
             }

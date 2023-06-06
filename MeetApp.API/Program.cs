@@ -108,7 +108,7 @@ else
 }
 
 // Seeding data into the database
- /* using (var scope = app.Services.CreateScope())
+/*  using (var scope = app.Services.CreateScope())
 {
     // Get Seed service
     var seeder = scope.ServiceProvider.GetService<Seed>();
