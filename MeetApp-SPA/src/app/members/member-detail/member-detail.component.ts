@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GalleryConfig, GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -12,22 +13,31 @@ import { UserService } from 'src/app/_services/user.service';
 export class MemberDetailComponent implements OnInit {
 
   user!: User;
+  galleryOptions!: GalleryConfig[];
+  galleryImages: GalleryItem[] = [];
 
   constructor(private userService: UserService, private alertify: AlertifyService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe( data =>{
+    this.route.data.subscribe(data => {
       this.user = data['user'];
     });
+    
+    this.galleryImages = this.getImages();
   }
 
-  // loadUser(){
-  //   this.userService.getUser(+this.route.snapshot.params['id']).subscribe((user: User) => {
-  //     this.user = user;
-  //   }, error => {
-  //     this.alertify.error(error);
-  //   });
-  // }
-
+  getImages(): GalleryItem[] {
+    const galleryItems: GalleryItem[] = [];
+    for (let i = 0; i < this.user.photos.length; i++) {
+      const galleryItem = new ImageItem({
+        src: this.user.photos[i].url,
+        thumb: this.user.photos[i].url
+      });
+      galleryItems.push(galleryItem);
+    }
+    console.log(galleryItems);
+    return galleryItems;
+  }
+ 
 }

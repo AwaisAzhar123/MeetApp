@@ -26,6 +26,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { GALLERY_CONFIG, GalleryConfig, GalleryModule } from 'ng-gallery';
 
 export function tokenGetter(){
   return localStorage.getItem('token');
@@ -52,6 +53,7 @@ export function tokenGetter(){
     FormsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    GalleryModule,
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
@@ -68,7 +70,18 @@ export function tokenGetter(){
     AuthGuard,
     UserService,
     MemberDetailResolver,
-    MemberListResolver
+    MemberListResolver,
+   [
+      {
+        provide: GALLERY_CONFIG,
+        useValue: {
+          autoHeight: true,
+          imageSize: 'contain',
+          thumb : true,
+        } as GalleryConfig
+      }
+    ],  
+    
   ],
   bootstrap: [AppComponent]
 })
